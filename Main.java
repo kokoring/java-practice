@@ -7,27 +7,47 @@ public class Main {
 	public static void main(String[] args) {
 		
 /* 
- * 연도가 주어졌을 때, 윤년이면 1, 아니면 0을 출력하는 프로그램을 작성하시오.
+ * 1에서부터 6까지의 눈을 가진 3개의 주사위를 던져서 다음과 같은 규칙에 따라 상금을 받는 게임이 있다. 
 
-윤년은 연도가 4의 배수이면서, 100의 배수가 아닐 때 또는 400의 배수일 때이다.
+같은 눈이 3개가 나오면 10,000원+(같은 눈)×1,000원의 상금을 받게 된다. 
+같은 눈이 2개만 나오는 경우에는 1,000원+(같은 눈)×100원의 상금을 받게 된다. 
+모두 다른 눈이 나오는 경우에는 (그 중 가장 큰 눈)×100원의 상금을 받게 된다.  
+예를 들어, 3개의 눈 3, 3, 6이 주어지면 상금은 1,000+3×100으로 계산되어 1,300원을 받게 된다. 
+또 3개의 눈이 2, 2, 2로 주어지면 10,000+2×1,000 으로 계산되어 12,000원을 받게 된다. 
+3개의 눈이 6, 2, 5로 주어지면 그중 가장 큰 값이 6이므로 6×100으로 계산되어 600원을 상금으로 받게 된다.
 
-예를 들어, 2012년은 4의 배수이면서 100의 배수가 아니라서 윤년이다. 
-1900년은 100의 배수이고 400의 배수는 아니기 때문에 윤년이 아니다. 
-하지만, 2000년은 400의 배수이기 때문에 윤년이다.
+3개 주사위의 나온 눈이 주어질 때, 상금을 계산하는 프로그램을 작성 하시오.
  */
 	
 	Scanner scanner = new Scanner(System.in);
 	
-	int year = scanner.nextInt();
+	int a = scanner.nextInt();
+	int b = scanner.nextInt();
+	int c = scanner.nextInt();
 	
-	if(year%400==0) {
-		System.out.println(1);
-	} else if(year%4==0 && year%100!=0) {
-		System.out.println(1);
-	} else {
-		System.out.println(0);
-	}
+	int result = 0 ;
 	
+	if(a==b) {
+		if(b==c) {
+			result = 10000 + (a*1000);
+		} else if(b!=c) {
+			result = 1000 + (a*100);
+		}	
+	} else if(a!=b) {
+		if(b==c) {
+			result = 1000 + (b*100);
+		} else if(a==c) {
+			result = 1000 * (a*100);
+		} else if(b!=c) {
+			if(a>b && a>c) {
+				result = a *100 ; 
+			} else if(b>a && b>c) {
+				result = b * 100;
+			} else if(c>a && c>b) {
+				result = c * 100;
+			}			
+		}
+	}	
+	System.out.println(result);
 	}
-
 }
